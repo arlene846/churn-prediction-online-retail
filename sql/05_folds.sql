@@ -1,0 +1,18 @@
+CREATE OR REPLACE TABLE `Online_Retail.folds` AS
+  SELECT 
+  'train' as fold_set,
+  i+1 as fold_id,
+  DATE_ADD('2009-12-01', INTERVAL i MONTH) As obs_start,
+  DATE_SUB((DATE_ADD('2009-12-01', INTERVAL i + 6 MONTH)), INTERVAL 1 DAY) as obs_end,
+  DATE_ADD('2010-07-01', INTERVAL i MONTH) As label_start,
+  DATE_SUB((DATE_ADD('2010-07-01', INTERVAL i+4 MONTH)),INTERVAL 1 DAY) AS label_end
+  FROM UNNEST(GENERATE_ARRAY(0, 2)) AS i
+  UNION ALL
+  SELECT 
+  'test' as fold_set,
+  i+1 as fold_id,
+  DATE_ADD('2010-11-01', INTERVAL i MONTH) As obs_start,
+  DATE_SUB((DATE_ADD('2010-11-01', INTERVAL i + 6 MONTH)), INTERVAL 1 DAY) as obs_end,
+  DATE_ADD('2011-06-01', INTERVAL i MONTH) As label_start,
+  DATE_SUB((DATE_ADD('2011-06-01', INTERVAL i + 4 MONTH)),INTERVAL 1 DAY) AS label_end
+  FROM UNNEST(GENERATE_ARRAY(0, 2)) AS i
