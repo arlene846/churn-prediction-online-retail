@@ -12,5 +12,5 @@ JOIN `Online_Retail.folds` AS f
 -- LEFT JOIN keeps customers with no visits in the last 30 days (Frequency_30 = 0)
 LEFT JOIN `Online_Retail.visits` AS v
   ON v.CustomerID = r.CustomerID
- AND DATE(v.InvoiceDate) BETWEEN DATE_SUB(f.obs_end, INTERVAL 30 DAY) AND f.obs_end
+ AND DATE(v.InvoiceDate) BETWEEN DATE_SUB(f.obs_end, INTERVAL 29 DAY) AND f.obs_end
 GROUP BY r.fold_set, r.fold_id, r.CustomerID, r.Frequency

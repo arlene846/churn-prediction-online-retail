@@ -42,7 +42,7 @@ raw_transactions          1,033,035 rows    pipeline/load_raw_transactions.py, s
   → folds                         6 rows    sql/05     (3 train + 3 test time windows)
   → eligible_customers        8,866 rows    sql/06     (2+ visits inside the observation window)
   → features                  8,866 rows    sql/07-12  (RFM, product variety, interval CV,
-                                                        30-day velocity, category dominance)
+                                                        30-day velocity, top-product spend share)
   → labels                    8,866 rows    sql/13     (churned = no visit in the label window)
   → training_data             8,866 rows    sql/14     (features + label, one row per customer per fold)
 ```
